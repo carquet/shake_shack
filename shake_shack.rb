@@ -1,35 +1,32 @@
-class Animal
-	def initialize(name)
+class MilkShake
+	def initialize
+		@base_price = 3
+		@ingredients = []
+	end
+	def add_ingredient(ingredient)
+		@ingredients.push(ingredient)
+	end
+	def price_of_milkshake
+		total_price_of_milkshake = @base_price
+		@ingredients.each do |ingredient|
+			total_price_of_milkshake += ingredient.price
+		end
+		total_price_of_milkshake
+	end
+end
+
+class Ingredient
+	attr_reader :name, :price 
+	def initialize(name, price)
 		@name = name
-	end
-
-	def describe
-		puts "this animal's name is #{@name}"
+		@price = price
 	end
 end
 
-class Dog < Animal
-	end
-class Cat < Animal
-end
+nizars_milkshake = MilkShake.new
+banana = Ingredient.new("banana", 2)
+chocolate_chips = Ingredient.new("chocolate chips", 1)
+nizars_milkshake.add_ingredient(banana)
+nizars_milkshake.add_ingredient(chocolate_chips)
 
-class Human < Animal
-	def  initialize(name, salary)
-		super(name)
-		@salary = salary
-	end
-
-	def describe_with_salary
-		puts "This human's name is #{@name} and its salary is #{@salary}"
-	end
-
-end
-
-dog = Dog.new "Winston Furshill"
-cat = Cat.new "David Meowie"
-human = Human.new "Johnny Applesee", 12000
-
-dog.describe
-cat.describe
-human.describe
-human.describe_with_salary
+puts nizars_milkshake.price_of_milkshake
